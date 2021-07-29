@@ -16,10 +16,14 @@ const personSchema = new Schema({
 let Person = mongoose.model('Person', personSchema);
 
 const createAndSavePerson = (done) => {
-  let max = new Person({ name: 'Max' }, { age: 3 }, { favoriteFoods: ['meat', 'cheese'] });
+  let max = new Person({
+    name: 'Max',
+    age: 3,
+    favoriteFoods: ['meat', 'cheese']
+  });
 
-  max.save(function(error, data) {
-    if (error) return console.error(error);
+  max.save((error, data) => {
+    if (error) done(error);
     done(null, data);
   })
 };
