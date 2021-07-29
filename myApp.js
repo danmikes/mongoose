@@ -10,7 +10,7 @@ const Schema = mongoose.Schema;
 const personSchema = new Schema({
   name: String,
   age: Number,
-  favoriteFoods: [String],
+  favoriteFoods: [String]
 })
 
 let Person = mongoose.model('Person', personSchema);
@@ -18,7 +18,7 @@ let Person = mongoose.model('Person', personSchema);
 const createAndSavePerson = (done) => {
   let max = new Person({ name: 'Max' }, { age: 3 }, { favoriteFoods: ['meat', 'cheese'] });
 
-  max.save((error, data) => {
+  max.save(function(error, data) {
     if (error) return console.error(error);
     done(null, data);
   })
