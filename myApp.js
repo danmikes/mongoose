@@ -7,11 +7,14 @@ require('dotenv').config();
 // });
 
 let secret;
-try {
-  secret = (process.env.MONGO_URI || secrets.MONGO_URI);
-  console.log('MONGO_URI found')
-} catch (error) {
-  console.log(e, 'MONGO_URI missing')
+if (process.env.MONGO_URI != null) {
+  secret = process.env.MONGO_URI;
+  console.log('secret = process.env.MONGO_URI')
+} else if (secrets.MONGO_URI != null) {
+  secret = secrets.MONGO_URI;
+  console.log('secret = secrets.MONGO_URI');
+} else {
+  console.log('secret = ""');
 }
 
 const mongoose = require('mongoose');
