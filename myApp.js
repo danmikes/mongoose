@@ -1,21 +1,6 @@
 require('dotenv').config();
 
-// const aws = require('aws-sdk');
-// let s3 = new aws.S3({
-//   accessKeyId: process.env.S3_KEY,
-//   secretAccessKey: process.env.S3_SECRET
-// });
-
-let secret;
-if (process.env.MONGO_URI != null) {
-  secret = process.env.MONGO_URI;
-  console.log('secret = process.env.MONGO_URI')
-} else if (secrets.MONGO_URI != null) {
-  secret = secrets.MONGO_URI;
-  console.log('secret = secrets.MONGO_URI');
-} else {
-  console.log('secret = ""');
-}
+const secret = process.env.MONGO_URI;
 
 const mongoose = require('mongoose');
 mongoose.connect(secret, { useNewUrlParser: true, useUnifiedTopology: true });
