@@ -19,7 +19,7 @@ const createAndSavePerson = (done) => {
   let max = new Person({ name: 'Max' }, { age: 3 }, { favoriteFoods: ['meat', 'cheese'] });
 
   max.save((error, data) => {
-    if (error) return done(error);
+    if (error) return console.error(error);
     done(null, data);
   })
 };
