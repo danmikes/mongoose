@@ -29,6 +29,8 @@ jobs:
       - name: retrieve environment variables
         env:
           process.env.MONGO_URI: ${{ secrets.MONGO_URI }}
+        run:
+          npm install
 
       # Runs a set of commands using the runners shell
     #  - name: install and start npm
