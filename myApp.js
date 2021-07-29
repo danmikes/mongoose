@@ -8,7 +8,7 @@ mongoose.connect(secret, { useNewUrlParser: true, useUnifiedTopology: true });
 const Schema = mongoose.Schema;
 
 const personSchema = new Schema({
-  name: { type: String, required: true },
+  name: String,
   age: Number,
   favoriteFoods: [String],
 })
@@ -16,7 +16,12 @@ const personSchema = new Schema({
 let Person = mongoose.model('Person', personSchema);
 
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  let max = new Person({ name: 'Max' }, { age: 3 }, { favoriteFoods: ['meat', 'cheese'] });
+
+  max.save((error, data) => {
+    if (error) return done(error);
+    done(null, data);
+  })
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
