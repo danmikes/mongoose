@@ -27,7 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Install Dependencies
-        run: npm install
+        run: npm start
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
 
