@@ -1,8 +1,9 @@
 {
   "name": "fcc-mongo-mongoose-challenges",
   "version": "0.0.1",
-  "description": "A mongo-db project",
+  "description": "mongo-db project",
   "main": "server.js",
+  "homepage": "https://dm-mongo.herokuapp.com/",
   "scripts": {
       "start": "node server.js"
   },
@@ -22,5 +23,5 @@
       "mongo",
       "express"
   ],
-  "license": "MIT"
+  "license": "ISC"
 }
