@@ -1,6 +1,14 @@
 require('dotenv').config();
+
+let secret;
+try {
+  secret = (process.env.MONGO_URI || secrets.MONGO_URI);
+  console.log('MONGO_URI found')
+} catch (error) {
+  console.log(e, 'MONGO_URI missing')
+}
+
 const mongoose = require('mongoose');
-const secret = process.env.MONGO_URI
 mongoose.connect(secret, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
