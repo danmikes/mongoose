@@ -4,7 +4,6 @@ const secret = process.env.MONGO_URI;
 const mongoose = require('mongoose');
 mongoose.connect(secret, { useNewUrlParser: true, useUnifiedTopology: true });
 
-
 const Schema = mongoose.Schema;
 
 const personSchema = new Schema({
@@ -15,21 +14,28 @@ const personSchema = new Schema({
 
 let Person = mongoose.model('Person', personSchema);
 
-const createAndSavePerson = (done) => {
-  let max = new Person({
-    name: 'Max',
-    age: 3,
-    favoriteFoods: ['meat', 'cheese']
-  });
 
-  max.save((error, data) => {
-    if (error) done(error);
-    done(null, data);
+let person = new Person({name: 'Max', age: 3, favoriteFoods: ['meat', 'cheese']})
+
+let people = [
+  { name: 'Daniel', age: 54, favoriteFoods: ['bramboracka'] },
+  { name: 'Olessia', age: 36, favoriteFoods: ['borsc'] },
+  { name: 'Valeria', age: 25, favoriteFoods: ['sushi'] },
+  { name: 'Natalia', age: 18, favoriteFoods: ['chicken'] },
+];
+
+const createAndSavePerson = (done) => {
+  Person.create(person, (err, data) => {
+    if (err) done(err)
+    done(null, data)
   })
 };
 
-const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
+const createManyPeople = (done) => {
+  Person.create(people, (err, data) => {
+    if (err) done(err)
+    done(null, data)
+  })
 };
 
 const findPeopleByName = (personName, done) => {
