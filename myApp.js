@@ -25,46 +25,46 @@ let person = { name: 'Max', age: 3, favoriteFoods: ['meat', 'cheese'] };
 // ];
 
 const createAndSavePerson = (done) => {
-  Person.create(person, (err, person) => {
+  Person.create(person, (err, createdPerson) => {
     if (err) done(err)
-    done(null, person)
+    done(null, createdPerson)
   })
 };
 
 const createManyPeople = (people, done) => {
-  Person.create(people, (err, people) => {
+  Person.create(people, (err, createdPeople) => {
     if (err) done(err)
-    done(null, people)
+    done(null, createdPeople)
   })
 };
 
 const findPeopleByName = (personName, done) => {
-  Person.find({ name: personName }, (err, people) => {
+  Person.find({ name: personName }, (err, foundPeople) => {
     if (err) done(err)
-    done(null, people)
+    done(null, foundPeople)
   })
 };
 
 const findOneByFood = (food, done) => {
-  Person.findOne({ favoriteFoods: food }, (err, food) => {
+  Person.findOne({ favoriteFoods: food }, (err, foundFood) => {
     if (err) done(err)
-    done(null, food)
+    done(null, foundFood)
   })
 };
 
 const findPersonById = (personId, done) => {
-  Person.findById(personId, (err, person) => {
+  Person.findById(personId, (err, foundPerson) => {
     if (err) done(err)
-    done(null, person)
+    done(null, foundPerson)
   })
 };
 
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger"
-  Person.findById(personId, (err, person) => {
+  Person.findById(personId, (err, foundPerson) => {
     if (err) done(err)
-    person.favoriteFoods.push(foodToAdd)
-    person.save((err, updatedPerson) => {
+    foundPerson.favoriteFoods.push(foodToAdd)
+    foundPerson.save((err, updatedPerson) => {
       if (err) done(err)
       done(null, updatedPerson)
     })
@@ -80,16 +80,18 @@ const findAndUpdate = (personName, done) => {
 };
 
 const removeById = (personId, done) => {
-  Person.findByIdAndRemove(personId, (err, person) => {
+  Person.findByIdAndRemove(personId, (err, removedPerson) => {
     if (err) done(err)
-    done(null, person)
+    done(null, removedPerson)
   })
 };
 
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
-
-  done(null /*, data*/);
+  Person.remove({ name: nameToRemove }, (err, response) => {
+    if (err) done(err)
+    done(null, response)
+  })
 };
 
 const queryChain = (done) => {
