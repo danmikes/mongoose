@@ -7,9 +7,9 @@ mongoose.connect(secret, { useNewUrlParser: true, useUnifiedTopology: true });
 const Schema = mongoose.Schema;
 
 const personSchema = new Schema({
-  name: String,
-  age: Number,
-  favoriteFoods: [String]
+  name: { type: String, required: true },
+  age: { type: Number },
+  favoriteFoods: { type: [String] }
 })
 
 let Person = mongoose.model('Person', personSchema);
@@ -25,44 +25,52 @@ let person = { name: 'Max', age: 3, favoriteFoods: ['meat', 'cheese'] };
 // ];
 
 const createAndSavePerson = (done) => {
-  Person.create(person, (err, data) => {
+  Person.create(person, (err, person) => {
     if (err) done(err)
-    done(null, data)
+    done(null, person)
   })
 };
 
 const createManyPeople = (people, done) => {
-  Person.create(people, (err, data) => {
+  Person.create(people, (err, people) => {
     if (err) done(err)
-    done(null, data)
+    done(null, people)
   })
 };
 
 const findPeopleByName = (personName, done) => {
-  Person.find({ name: personName }, (err, data) => {
+  Person.find({ name: personName }, (err, people) => {
     if (err) done(err)
-    done(null, data);
+    done(null, people)
   })
 };
 
 const findOneByFood = (food, done) => {
-  Person.findOne({ favoriteFoods: food }, (err, data) => {
+  Person.findOne({ favoriteFoods: food }, (err, food) => {
     if (err) done(err)
-    done(null, data);
+    done(null, food)
   })
 };
 
 const findPersonById = (personId, done) => {
-  Person.findById(personId, (err, data) => {
+  Person.findById(personId, (err, person) => {
     if (err) done(err)
-    done(null, data);
+    done(null, person)
   })
 };
 
 const findEditThenSave = (personId, done) => {
-  const foodToAdd = "hamburger";
+  const foodToAdd = "hamburger"
+  Person.findById(personId, (err, person) => {
+    if (err) done(err)
 
-  done(null /*, data*/);
+    person.favoriteFoods.push(foodToAdd)
+
+    person.save((err, updatedPerson) => {
+      if (err) done(err)
+      done(null, updatedPerson)
+    })
+  })
 };
 
 const findAndUpdate = (personName, done) => {
