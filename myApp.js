@@ -15,14 +15,14 @@ const personSchema = new Schema({
 let Person = mongoose.model('Person', personSchema);
 
 
-let person = new Person({name: 'Max', age: 3, favoriteFoods: ['meat', 'cheese']})
+let person = { name: 'Max', age: 3, favoriteFoods: ['meat', 'cheese'] };
 
-let people = [
-  { name: 'Daniel', age: 54, favoriteFoods: ['bramboracka'] },
-  { name: 'Olessia', age: 36, favoriteFoods: ['borsc'] },
-  { name: 'Valeria', age: 25, favoriteFoods: ['sushi'] },
-  { name: 'Natalia', age: 18, favoriteFoods: ['chicken'] },
-];
+// let people = [
+//   { name: 'Daniel', age: 54, favoriteFoods: ['bramboracka'] },
+//   { name: 'Olessia', age: 36, favoriteFoods: ['borsc'] },
+//   { name: 'Valeria', age: 25, favoriteFoods: ['sushi'] },
+//   { name: 'Natalia', age: 18, favoriteFoods: ['chicken'] },
+// ];
 
 const createAndSavePerson = (done) => {
   Person.create(person, (err, data) => {
@@ -31,7 +31,7 @@ const createAndSavePerson = (done) => {
   })
 };
 
-const createManyPeople = (done) => {
+const createManyPeople = (people, done) => {
   Person.create(people, (err, data) => {
     if (err) done(err)
     done(null, data)
